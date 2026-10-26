@@ -3,7 +3,7 @@ services:
     name: pet-sitting-platform
     runtime: docker
     dockerfilePath: ./Dockerfile.public
-    healthCheckPath: /api/health
+    healthCheckPath: /
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
