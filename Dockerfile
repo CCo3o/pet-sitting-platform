@@ -1,13 +1,23 @@
-FROM maven:3.9-eclipse-temurin-21 AS build
+FROM node:22-alpine AS web-build
+WORKDIR /web
+COPY frontend/package*.json ./
+RUN npm ci --no-audit --no-fund
+COPY frontend/ ./
+ENV VITE_APP_MODE=production
+RUN npm run build
+
+FROM maven:3.9-eclipse-temurin-21 AS app-build
 WORKDIR /app
 COPY pom.xml .
 RUN mvn -B -ntp dependency:go-offline
 COPY src src
+COPY --from=web-build /web/dist/ src/main/resources/static/
 RUN mvn -B -ntp package -DskipTests
+
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 RUN groupadd --system pets && useradd --system --gid pets pets && mkdir -p /app/data && chown pets:pets /app/data
-COPY --from=build /app/target/pet-sitting-platform-0.1.0.jar /app/app.jar
+COPY --from=app-build /app/target/pet-sitting-platform-0.1.0.jar /app/app.jar
 USER pets
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app/app.jar"]
