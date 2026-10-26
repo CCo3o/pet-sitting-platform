@@ -54,7 +54,7 @@ public class SecurityConfig {
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .requestCache(c -> c.disable())
             .authorizeHttpRequests(a -> a
-                .requestMatchers("/api/health", "/api/auth/login", "/api/auth/register").permitAll()
+                .requestMatchers("/", "/index.html", "/assets/**", "/favicon.ico", "/api/health", "/api/auth/login", "/api/auth/register").permitAll()
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/slots").permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/**").authenticated()
