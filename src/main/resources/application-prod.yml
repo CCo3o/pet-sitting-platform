@@ -1,0 +1,9 @@
+server:
+  address: 0.0.0.0
+  forward-headers-strategy: framework
+spring:
+  flyway:
+    baseline-on-migrate: false
+app:
+  order-expiry:
+    enabled: true

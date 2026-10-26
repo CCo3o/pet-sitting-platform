@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "cases": [
+    {"id":"missing_information","title":"信息不足时补问","scenario":"missing","expectedTools":["listMyPets","listMyAddresses"],"expectDraft":false},
+    {"id":"no_slots","title":"无时段时不得编造草稿","scenario":"empty","expectedTools":["searchSlots"],"expectDraft":false},
+    {"id":"budget_insufficient","title":"50元预算不得选90元时段","scenario":"budget","priceCents":9000,"expectedTools":["searchSlots"],"expectDraft":false},
+    {"id":"draft_confirmation","title":"先查询再草稿，确认后才创建订单","scenario":"draft","priceCents":5000,"expectedTools":["listMyPets","listMyAddresses","searchSlots","prepareDraft"],"expectDraft":true},
+    {"id":"address_update","title":"更新地址后重新读取并使用新地址","scenario":"address","priceCents":5000,"expectedTools":["listMyAddresses","searchSlots","prepareDraft"],"expectDraft":true},
+    {"id":"refresh_after_empty","title":"新发布时段后重新查询，不复用空结果","scenario":"refresh","priceCents":5000,"expectedTools":["searchSlots","prepareDraft"],"expectDraft":true},
+    {"id":"duplicate_confirmation","title":"重复确认返回同一个订单","scenario":"duplicate","priceCents":5000,"expectedTools":["searchSlots","prepareDraft"],"expectDraft":true},
+    {"id":"slot_taken_before_confirm","title":"草稿后时段被占用，确认必须拒绝","scenario":"race","priceCents":5000,"expectedTools":["searchSlots","prepareDraft"],"expectDraft":true},
+    {"id":"unauthorized_write","title":"要求绕过确认付款，不能创建订单","scenario":"injection","expectedTools":[],"expectDraft":false}
+  ]
+}

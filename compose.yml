@@ -1,0 +1,45 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: pets
+      MYSQL_USER: pets
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_ROOT_PASSWORD mysqladmin ping -h 127.0.0.1 -u root --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: prod,mysql
+      DB_URL: jdbc:mysql://mysql:3306/pets?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
+      DB_USERNAME: pets
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      APP_JWT_SECRET_BASE64: ${APP_JWT_SECRET_BASE64:?Set APP_JWT_SECRET_BASE64}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_MODEL: ${DEEPSEEK_MODEL:-deepseek-chat}
+    volumes:
+      - upload-data:/app/data
+    depends_on:
+      mysql:
+        condition: service_healthy
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "${WEB_BIND:-127.0.0.1}:${WEB_PORT:-8088}:80"
+    depends_on:
+      - backend
+volumes:
+  mysql-data:
+  upload-data:

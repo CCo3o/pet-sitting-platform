@@ -1,0 +1,14 @@
+target/
+.tools/
+data/
+.idea/
+*.iml
+.env
+*.log
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+frontend/test-results/
+frontend/playwright-report/
+__pycache__/
+*.pyc
