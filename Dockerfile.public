@@ -11,7 +11,7 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn -B -ntp dependency:go-offline
 COPY src src
-COPY --from=web-build /web/dist src/main/resources/static
+COPY --from=web-build /web/dist/ src/main/resources/static/
 RUN mvn -B -ntp package -DskipTests
 
 FROM eclipse-temurin:21-jre
