@@ -15,7 +15,13 @@ public class ProductionAdmin implements ApplicationRunner {
     private final String username,password;
     public ProductionAdmin(JdbcTemplate db,DirectoryMapper mapper,PasswordEncoder passwords,@Value("${ADMIN_USERNAME:admin}") String username,@Value("${ADMIN_PASSWORD:}") String password){this.db=db;this.mapper=mapper;this.passwords=passwords;this.username=username;this.password=password;}
     @Override @Transactional public void run(ApplicationArguments args)throws Exception{
-        try(var connection=db.getDataSource().getConnection()){if(!connection.getMetaData().getURL().startsWith("jdbc:mysql:"))throw new IllegalStateException("生产环境需要 MySQL 数据库");}
+        // Render's free demo deployment uses the file-backed H2 profile. MySQL is
+        // still supported and selected explicitly with the `mysql` profile.
+        try(var connection=db.getDataSource().getConnection()){
+            String url = connection.getMetaData().getURL();
+            if (!url.startsWith("jdbc:mysql:") && !url.startsWith("jdbc:h2:"))
+                throw new IllegalStateException("仅支持 MySQL 或 H2 数据库");
+        }
         if(!username.matches("[a-z0-9_]{3,32}")||password.length()<12||password.getBytes(java.nio.charset.StandardCharsets.UTF_8).length>72)throw new IllegalStateException("生产管理员需设置合法用户名及 12 字符以上密码（最多72字节）");
         long id=mapper.nextAccountId();
         var rows=db.queryForList("SELECT a.role FROM credentials c JOIN accounts a ON a.id=c.account_id WHERE c.username=?",username);
