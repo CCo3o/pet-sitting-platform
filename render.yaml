@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: pet-sitting-platform
+    runtime: docker
+    dockerfilePath: ./Dockerfile.public
+    healthCheckPath: /api/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: APP_JWT_SECRET_BASE64
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DEEPSEEK_API_KEY
+        sync: false
