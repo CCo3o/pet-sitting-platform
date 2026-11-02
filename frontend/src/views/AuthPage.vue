@@ -48,7 +48,7 @@ function fillDemo(username: string) {
   <main class="auth-shell">
     <section class="story-panel">
       <RouterLink to="/login" class="brand" aria-label="宠伴到家首页">
-        <span class="brand-symbol">✣</span><span>宠伴到家<small>PET CARE, AT HOME</small></span>
+        <span class="brand-symbol" aria-hidden="true">🐾</span><span>宠伴到家<small>PET CARE, AT HOME</small></span>
       </RouterLink>
       <div class="story-copy">
         <span class="eyebrow"><span class="small-dot"></span> 熟悉的家，安心的陪伴</span>

@@ -14,7 +14,7 @@ const links=computed(()=>{
 async function logout(){leaving.value=true;try{await auth.logout();await router.replace('/login')}catch(e){ElMessage.error((e as Error).message)}finally{leaving.value=false}}
 </script>
 <template>
-  <div class="workspace-shell"><header class="workspace-header"><RouterLink to="/workspace" class="brand"><span class="brand-symbol">✣</span><span>宠伴到家<small>PET CARE, AT HOME</small></span></RouterLink><div class="header-account"><span class="role-badge">{{ auth.user && roleNames[auth.user.role] }}</span><span>{{ auth.user?.displayName }}</span><el-button text :loading="leaving" @click="logout">退出登录</el-button></div></header>
+  <div class="workspace-shell"><header class="workspace-header"><RouterLink to="/workspace" class="brand"><span class="brand-symbol" aria-hidden="true">🐾</span><span>宠伴到家<small>PET CARE, AT HOME</small></span></RouterLink><div class="header-account"><span class="role-badge">{{ auth.user && roleNames[auth.user.role] }}</span><span>{{ auth.user?.displayName }}</span><el-button text :loading="leaving" @click="logout">退出登录</el-button></div></header>
   <nav class="platform-nav" aria-label="业务导航"><RouterLink v-for="link in links" :key="link[0]" :to="link[0] ?? '/workspace'">{{ link[1] }}</RouterLink></nav>
   <main class="workspace-main"><slot /></main></div>
 </template>
