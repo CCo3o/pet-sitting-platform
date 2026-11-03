@@ -177,3 +177,42 @@ body{background:#fbf8ef;color:var(--ink)}
   .el-button:not(:disabled):hover{transform:translateY(-2px)}
 }
 @media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.pointer-companion{display:none}.pet-scene,.business-card,.workspace-section,.agent-overview article,.profile-card,.order-card,.el-button{animation:none!important;transition:none!important}}
+
+/* 参考宠物服务视觉：照片主角、粉蓝分区和更明显的行动入口。 */
+.auth-shell{grid-template-columns:minmax(0,55%) minmax(400px,45%);background:#fff9f6}
+.auth-shell .story-panel{min-height:100vh;padding:34px clamp(30px,5.5vw,96px) 0;background:#f3e3e2!important;isolation:isolate}
+.auth-shell .story-panel::before{content:'';position:absolute;width:440px;height:440px;right:-130px;top:18%;border:1px solid rgba(214,147,152,.35);border-radius:50%;box-shadow:0 0 0 55px rgba(255,255,255,.12),0 0 0 110px rgba(255,255,255,.08);pointer-events:none}
+.auth-shell .brand{position:relative;z-index:3;color:#18243b}
+.auth-shell .brand-symbol{background:#f5a5af;color:#fff7f2;box-shadow:0 5px 0 #e7c8c9,0 10px 22px rgba(127,64,75,.14)}
+.auth-shell .brand small{color:#695f67}
+.auth-shell .story-copy{margin-top:clamp(55px,10vh,135px);position:relative;z-index:2;max-width:650px}
+.auth-shell .story-copy .eyebrow{font-size:12px;letter-spacing:2px;color:#ba7783}
+.auth-shell .story-copy h1{font-size:clamp(52px,5.8vw,96px);line-height:1.08;letter-spacing:-3px;font-weight:850;color:#101b32;margin:28px 0 23px}
+.auth-shell .story-copy h1 span{color:#d87381}
+.auth-shell .story-copy p{font-size:15px;line-height:1.9;color:#67616a;max-width:430px}
+.hero-cta{display:inline-flex;align-items:center;gap:30px;margin-top:28px;background:#111d38;color:white;border-radius:999px;padding:16px 24px;font-size:14px;font-weight:700;box-shadow:0 10px 22px rgba(17,29,56,.17);transition:transform .25s,box-shadow .25s}
+.hero-cta:hover{transform:translateY(-3px);box-shadow:0 15px 28px rgba(17,29,56,.22)}
+.hero-cta span{font-size:19px}
+.hero-pet-stage{position:relative;z-index:1;min-height:clamp(270px,36vw,520px);margin-top:-80px;pointer-events:none}
+.hero-pets{position:absolute;right:-7%;bottom:-2px;width:min(108%,850px);height:auto;max-height:100%;object-fit:contain;object-position:bottom right;filter:drop-shadow(0 18px 18px rgba(113,77,72,.12));transition:transform .35s ease-out;transform:translate(var(--pet-shift-x,0px),var(--pet-shift-y,0px))}
+.hero-note{position:absolute;right:1%;top:8%;display:grid;gap:6px;background:#14213e;color:white;border-radius:20px;padding:17px 21px;box-shadow:0 12px 25px rgba(30,42,65,.14);transform:rotate(5deg)}
+.hero-note strong{font-size:20px}.hero-note small{font-size:10px;color:#e9eaf1}
+.hero-orbit{position:absolute;color:#d67a88;animation:hero-float 4s ease-in-out infinite}.orbit-one{right:3%;top:34%;font-size:34px}.orbit-two{left:42%;top:5%;font-size:40px;animation-delay:-2s}
+@keyframes hero-float{50%{transform:translateY(-13px) rotate(8deg)}}
+.auth-shell .story-benefits{position:relative;z-index:2;justify-content:flex-start;gap:17px;margin:0 -10vw 0;padding:24px 10vw;background:#d7e3ef;color:#1b2c48;font-size:13px;font-weight:700;white-space:nowrap}
+.auth-shell .story-benefits i{background:#93abc2}
+.auth-shell .story-footer{display:none}
+.auth-shell .form-panel{background:#fffdfa;padding:34px clamp(30px,5vw,90px) 24px}
+.auth-shell .form-top{color:#c47886;font-weight:700;letter-spacing:.5px}
+.auth-shell .auth-card{max-width:460px;background:#fff;border-color:#f1e8e5;box-shadow:0 20px 55px rgba(98,69,77,.1);padding:36px;border-radius:28px}
+.auth-shell .auth-tabs a.active,.auth-shell .account-hint a{color:#bd6374}
+.auth-shell .auth-tabs a.active::after{background:#d77d8c}
+.auth-shell .auth-heading h2{font-size:30px;color:#172039}
+.auth-shell .auth-heading .eyebrow{color:#c77685}
+.auth-shell .el-input__wrapper{background:#fffdfc;box-shadow:0 0 0 1px #e8deda inset}
+.auth-shell .submit-button.el-button--primary{background:#14213e;border-color:#14213e;box-shadow:0 5px 0 #8494af}
+.auth-shell .role-picker button.selected{background:#fff0f0;border-color:#d78a95;color:#9f4e60;box-shadow:0 5px 0 #f0d9dc}
+@media(max-width:1050px){.auth-shell{grid-template-columns:minmax(0,50%) minmax(390px,50%)}.auth-shell .story-panel{padding-left:35px;padding-right:25px}.auth-shell .story-copy h1{font-size:clamp(45px,5vw,70px)}.hero-pet-stage{margin-top:-20px}.auth-shell .story-benefits{margin:0 -25px;padding:20px 25px;font-size:11px}}
+@media(max-width:760px){.auth-shell{display:block}.auth-shell .story-panel{min-height:0;padding:25px 25px 0}.auth-shell .story-copy{margin-top:36px}.auth-shell .story-copy h1{font-size:clamp(42px,9vw,66px);margin:15px 0}.auth-shell .story-copy p{font-size:13px}.hero-cta{margin-top:18px;padding:12px 20px}.hero-pet-stage{min-height:260px;margin-top:-15px}.hero-pets{width:min(95%,560px);right:0}.hero-note{right:0;top:14%;padding:11px 13px}.hero-note strong{font-size:14px}.hero-note small{font-size:9px}.auth-shell .story-benefits{margin:0 -25px;padding:17px 25px;justify-content:center}.auth-shell .form-panel{padding:28px 20px;min-height:0}.auth-shell .auth-card{margin:20px auto 30px;padding:26px}}
+@media(max-width:480px){.auth-shell .story-copy h1{font-size:44px}.hero-pet-stage{min-height:195px}.hero-note{display:none}.auth-shell .story-benefits{gap:9px;font-size:10px;padding:15px 10px}.auth-shell .story-benefits i{display:none}}
+@media(prefers-reduced-motion:reduce){.hero-orbit{animation:none}.hero-pets,.hero-cta{transition:none}}

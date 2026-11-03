@@ -3,7 +3,7 @@ import { computed, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowRight, Lock, User as UserIcon } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import PetScene from '../components/PetScene.vue'
+import heroPets from '../assets/hero-pets.png'
 import { useAuthStore } from '../stores/auth'
 
 const route = useRoute(), router = useRouter(), auth = useAuthStore()
@@ -51,12 +51,17 @@ function fillDemo(username: string) {
         <span class="brand-symbol" aria-hidden="true">🐾</span><span>宠伴到家<small>PET CARE, AT HOME</small></span>
       </RouterLink>
       <div class="story-copy">
-        <span class="eyebrow"><span class="small-dot"></span> 熟悉的家，安心的陪伴</span>
-        <h1>你安心出门，<br />我们用心照顾。</h1>
-        <p>让每一餐、每一次陪伴都有着落。<br />为你的毛孩子，找到细心的上门喂养员。</p>
+        <span class="eyebrow"><span class="small-dot"></span> 陪伴它们，从熟悉的家开始</span>
+        <h1>放心出门，<br /><span>宠爱</span>留在家。</h1>
+        <p>上门喂养、贴心照顾、记录每一份牵挂。<br />让毛孩子在自己的小天地里，安心等你回家。</p>
+        <RouterLink to="/register" class="hero-cta">开启安心照顾 <span aria-hidden="true">↗</span></RouterLink>
       </div>
-      <PetScene />
-      <div class="story-benefits"><span>预约上门</span><i></i><span>喂养记录</span><i></i><span>贴心陪伴</span></div>
+      <div class="hero-pet-stage" aria-hidden="true">
+        <div class="hero-orbit orbit-one">✦</div><div class="hero-orbit orbit-two">♡</div>
+        <img :src="heroPets" alt="" class="hero-pets" />
+        <div class="hero-note"><strong>安心托付</strong><small>每一次上门，都有记录</small></div>
+      </div>
+      <div class="story-benefits"><span>🐾 预约上门</span><i></i><span>♡ 喂养记录</span><i></i><span>✦ 贴心陪伴</span></div>
       <p class="story-footer">每一个小生命，都值得被温柔照顾。</p>
     </section>
 
